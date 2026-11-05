@@ -74,6 +74,5 @@ cur.execute("""
 """)
 print("Проверка orders:", cur.fetchall())
 
-
 cur.close()
 conn.close()
