@@ -25,33 +25,24 @@ orders_data = read_csv_as_dicts(data_dir / "orders_data.csv")
 
 # 1. Сначала родители (на них ссылаются внешние ключи), потом заказы
 for row in customers_data:
-    try:
-        cur.execute(
-            "INSERT INTO customers (customer_id, company_name, contact_name) VALUES (%s, %s, %s);",
-            (row["customer_id"], row["company_name"], row["contact_name"]),
-        )
-    except Exception as e:
-        print(f"Пропущена строка customers: {row['customer_id']} — {e}")
+    cur.execute(
+        "INSERT INTO customers (customer_id, company_name, contact_name) VALUES (%s, %s, %s);",
+        (row["customer_id"], row["company_name"], row["contact_name"]),
+    )
 
 for row in employees_data:
-    try:
-        cur.execute(
-            "INSERT INTO employees (employee_id, first_name, last_name, title, birth_date, notes) VALUES (%s, %s, %s, %s, %s, %s);",
-            (row["employee_id"], row["first_name"], row["last_name"],
-             row["title"], row["birth_date"], row["notes"]),
-        )
-    except Exception as e:
-        print(f"Пропущена строка employees: {row['employee_id']} — {e}")
+    cur.execute(
+        "INSERT INTO employees (employee_id, first_name, last_name, title, birth_date, notes) VALUES (%s, %s, %s, %s, %s, %s);",
+        (row["employee_id"], row["first_name"], row["last_name"],
+        row["title"], row["birth_date"], row["notes"]),
+    )
 
 for row in orders_data:
-    try:
-        cur.execute(
-            "INSERT INTO orders (order_id, customer_id, employee_id, order_date, ship_city) VALUES (%s, %s, %s, %s, %s);",
-            (row["order_id"], row["customer_id"], row["employee_id"],
-             row["order_date"], row["ship_city"]),
-        )
-    except Exception as e:
-        print(f"Пропущена строка orders: {row['order_id']} — {e}")
+    cur.execute(
+        "INSERT INTO orders (order_id, customer_id, employee_id, order_date, ship_city) VALUES (%s, %s, %s, %s, %s);",
+        (row["order_id"], row["customer_id"], row["employee_id"],
+        row["order_date"], row["ship_city"]),
+    )
 
 conn.commit()
 
